@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const TARGET = process.env.npm_lifecycle_event;
 
 function isExternal(module) {
   const context = module.context;
@@ -10,21 +13,9 @@ function isExternal(module) {
   return context.indexOf('node_modules') !== -1;
 }
 
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+const commonConfig = {
   entry: {
     app: './src/index.tsx',
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
-  },
-  devServer: {
-    contentBase: path.resolve(__dirname, "dist"),
-    host: "0.0.0.0",
-    compress: true,
-    historyApiFallback: true,
-    port: 9000
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -57,3 +48,34 @@ module.exports = {
   }
 }
 
+const devConfig = {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, "dist"),
+    host: "0.0.0.0",
+    compress: true,
+    historyApiFallback: true,
+    port: 9000
+  }
+};
+
+const buildConfig = {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[chunkhash].js'
+  },
+};
+
+switch(TARGET) {
+  case 'start': 
+    console.log('> Dev Task'); 
+    module.exports = merge(commonConfig, devConfig);
+    break;
+  case 'build': 
+    console.log('> Build Task');
+    module.exports = merge(commonConfig, buildConfig);
+    break;
+}
