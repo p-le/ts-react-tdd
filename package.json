@@ -5,7 +5,21 @@
   "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
-    "test": "./node_modules/.bin/karma start"
+    "test": "./node_modules/.bin/jest --watch"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [ "ts", "tsx", "js" ],
+    "collectCoverage": true,
+    "collectCoverageFrom" : [ "src/**/*.{ts,tsx,js,jsx}" ],
+    "coveragePathIgnorePatterns": [
+      "src/App.tsx"
+    ],
+    "coverageDirectory": "<rootDir>/__coverage__",
+    "coverageReporters": [ "text", "html" ]
   },
   "dependencies": {
     "prop-types": "^15.5.10",
@@ -14,17 +28,22 @@
     "typescript": "^2.4.2"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.42",
     "@types/enzyme": "^2.8.4",
     "@types/jest": "^20.0.5",
     "@types/prop-types": "^15.5.1",
     "@types/react": "^15.0.39",
     "@types/react-addons-test-utils": "^0.14.19",
     "@types/react-dom": "^15.5.1",
+    "@types/react-test-renderer": "^15.5.2",
     "awesome-typescript-loader": "^3.2.2",
     "css-loader": "^0.28.4",
+    "enzyme": "^2.9.1",
     "file-loader": "^1.0.0",
     "html-webpack-plugin": "^2.29.0",
     "jasmine-core": "^2.6.4",
+    "jest": "^20.0.4",
+    "react-test-renderer": "^15.6.1",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
     "ts-jest": "^20.0.7",
