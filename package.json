@@ -1,0 +1,37 @@
+{
+  "name": "ts-mastering",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server",
+    "test": "./node_modules/.bin/karma start"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "typescript": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^2.8.4",
+    "@types/jest": "^20.0.5",
+    "@types/prop-types": "^15.5.1",
+    "@types/react": "^15.0.39",
+    "@types/react-addons-test-utils": "^0.14.19",
+    "@types/react-dom": "^15.5.1",
+    "awesome-typescript-loader": "^3.2.2",
+    "css-loader": "^0.28.4",
+    "file-loader": "^1.0.0",
+    "html-webpack-plugin": "^2.29.0",
+    "jasmine-core": "^2.6.4",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.18.2",
+    "ts-jest": "^20.0.7",
+    "tslint": "^5.5.0",
+    "tslint-react": "^3.1.0",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.4.0",
+    "webpack-dev-server": "^2.6.1"
+  }
+}
