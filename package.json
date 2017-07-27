@@ -29,7 +29,8 @@
     "coverageDirectory": "<rootDir>/__coverage__",
     "coverageReporters": [
       "text",
-      "html"
+      "html",
+      "lcov"
     ]
   },
   "dependencies": {
@@ -48,6 +49,7 @@
     "@types/react-dom": "^15.5.1",
     "@types/react-test-renderer": "^15.5.2",
     "awesome-typescript-loader": "^3.2.2",
+    "coveralls": "^2.13.1",
     "css-loader": "^0.28.4",
     "enzyme": "^2.9.1",
     "file-loader": "^1.0.0",
