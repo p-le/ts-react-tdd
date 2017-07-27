@@ -16,7 +16,7 @@
     "collectCoverage": true,
     "collectCoverageFrom" : [ "src/**/*.{ts,tsx,js,jsx}" ],
     "coveragePathIgnorePatterns": [
-      "src/App.tsx"
+      "src/index.tsx"
     ],
     "coverageDirectory": "<rootDir>/__coverage__",
     "coverageReporters": [ "text", "html" ]

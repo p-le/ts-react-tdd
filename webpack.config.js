@@ -13,7 +13,7 @@ function isExternal(module) {
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: './src/app.tsx',
+    app: './src/index.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

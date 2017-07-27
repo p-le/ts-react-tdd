@@ -9,6 +9,7 @@
         "no-angle-bracket-type-assertion": false,
         "quotemark": [ true, "single", "avoid-escape" ],
         "ordered-imports": false,
+        "member-access": [true, "no-public"],
         "trailing-comma": [ true, {
             "multiline": {
                 "objects": "always",

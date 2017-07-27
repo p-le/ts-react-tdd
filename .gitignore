@@ -10,6 +10,7 @@ pids
 lib-cov
 coverage
 __coverage__
+.vscode
 .nyc_output
 .grunt
 bower_components
