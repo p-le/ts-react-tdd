@@ -6,3 +6,12 @@ before_script:
   - yarn install
 script:
   - yarn test
+before_deploy:
+  - yarn run build
+deploy:
+  provider: pages
+  local_dir: dist
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
