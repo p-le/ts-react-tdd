@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Hello } from '../src/components/Hello';
+import { Hello } from './Hello';
 import { shallow } from 'enzyme';
 
 describe('<Hello />', () => {

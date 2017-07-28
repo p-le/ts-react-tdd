@@ -8,6 +8,8 @@ script:
   - yarn test
 before_deploy:
   - yarn run build
+after_success:
+  - cat __coverage__/lcov.info | ./node_modules/.bin/coveralls
 deploy:
   provider: pages
   local_dir: dist
