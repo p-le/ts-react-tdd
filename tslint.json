@@ -10,6 +10,7 @@
         "quotemark": [ true, "single", "avoid-escape" ],
         "ordered-imports": false,
         "member-access": [true, "no-public"],
+        "object-literal-sort-keys": false,
         "trailing-comma": [ true, {
             "multiline": {
                 "objects": "always",
@@ -17,7 +18,19 @@
                 "functions": "never",
                 "typeLiterals": "ignore"
             }
-        }]
+        }],
+        "member-ordering": [
+            true, {
+                "order": [
+                    "static-field",
+                    "instance-field",
+                    "constructor",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method"
+                ]
+            }
+        ]
     },
     "rulesDirectory": []
 }

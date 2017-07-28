@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const TARGET = process.env.npm_lifecycle_event;
 
@@ -27,7 +28,8 @@ const commonConfig = {
       minChunks: function(module) {
         return isExternal(module);
       }
-    })
+    }),
+    new ExtractTextPlugin("styles.css")
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"]
@@ -43,6 +45,13 @@ const commonConfig = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: 'awesome-typescript-loader'
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
     ]
   }
