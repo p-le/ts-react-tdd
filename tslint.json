@@ -30,7 +30,11 @@
                     "private-instance-method"
                 ]
             }
-        ]
+        ],
+        "jsx-curly-spacing": {
+            "when": "never", 
+            "children": true
+        }
     },
     "rulesDirectory": []
 }
