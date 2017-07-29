@@ -3,7 +3,7 @@ import { render, mount } from 'enzyme';
 import { Letter, ILetterProps } from './Letter';
 
 describe('<Letter />', () => {
-    let props : ILetterProps;
+    let props: ILetterProps;
 
     beforeEach (() => {
         props = {
@@ -20,10 +20,7 @@ describe('<Letter />', () => {
 
     it('shoulder transition properly', () => {
         const spyEnter = jest.spyOn(Letter.prototype, 'handleEnter');
-        const spyExit = jest.spyOn(Letter.prototype, 'handleExit');
         const wrapper = mount(<Letter {...props} />);
         expect(spyEnter).toHaveBeenCalled();
-        wrapper.unmount();
-        expect(spyExit).toHaveBeenCalled();
     });
 });

@@ -18,7 +18,7 @@ describe('<Alphabet />', () => {
         jest.runTimersToTime(1500);
         const alphabet: string[] = wrapper.state('alphabet');
         expect(spy).toBeCalled();
-        expect(wrapper.find('g').children().first().text()).toBe(alphabet[0]);
+        expect(wrapper.find('g').children().length).toEqual(alphabet.length);
         wrapper.unmount();
         expect((clearInterval as any).mock.calls.length).toBe(1);
     });
