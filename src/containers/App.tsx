@@ -3,8 +3,8 @@ import Grid from '../components/Grid/Grid';
 import { BarChart } from '../components/Charts/BarChart';
 import { LineChart } from '../components/Charts/LineChart';
 import { Alphabet } from '../components/Shared/Alphabet';
-import { PushMenu } from '../components/Shared/PushMenu';
 import { EnhancedMenu } from '../components/Navigation/EnhancedMenu';
+import { Dropdown } from '../components/Shared/Dropdown';
 import { timeParse } from 'd3';
 
 interface IAppState {
@@ -48,6 +48,7 @@ export class App extends React.Component<{}, IAppState> {
       <div>
         <EnhancedMenu />
         <Grid fluid={true}>
+          <Dropdown triggerFn={console.log}/>
           <div style={{ width: '60%' }}>
             <svg width={500} height={500} >
               <Alphabet />
