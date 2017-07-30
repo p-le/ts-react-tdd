@@ -27,6 +27,8 @@ const StyledGrid = styled(Grid)`
     margin-left: auto;
     padding-right: ${(props: IGridProps) => `${props.theme.gridGutterWidth / 2}px`};
     padding-left: ${(props: IGridProps) => `${props.theme.gridGutterWidth / 2}px`};
+    display : flex;
+    flex-wrap: wrap;
 `;
 
 export default StyledGrid;

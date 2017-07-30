@@ -4,6 +4,7 @@ import { BarChart } from '../components/Charts/BarChart';
 import { LineChart } from '../components/Charts/LineChart';
 import { Alphabet } from '../components/Shared/Alphabet';
 import { PushMenu } from '../components/Shared/PushMenu';
+import { EnhancedMenu } from '../components/Navigation/EnhancedMenu';
 import { timeParse } from 'd3';
 
 interface IAppState {
@@ -24,7 +25,6 @@ export class App extends React.Component<{}, IAppState> {
   }
 
   handleMenu() {
-    console.log(this.refs);
     this.setState({
       openMenu: !this.state.openMenu,
     });
@@ -45,15 +45,22 @@ export class App extends React.Component<{}, IAppState> {
     ];
 
     return (
-      <Grid fluid={true}>
-        <PushMenu open={this.state.openMenu} handleMenu={this.handleMenu} />
-        <svg width={500} height={500} >
-          <Alphabet />
-        </svg>
-        <BarChart data={[5, 10, 1, 3]} size={[500, 500]} />
-        <LineChart data={data} />
-        <button onClick={this.handleMenu}>Open Menu</button>
-      </Grid>
+      <div>
+        <EnhancedMenu />
+        <Grid fluid={true}>
+          <div style={{ width: '60%' }}>
+            <svg width={500} height={500} >
+              <Alphabet />
+            </svg>
+          </div>
+          <div style={{ width: '40%' }}>
+            <BarChart data={[5, 10, 1, 3]} size={[500, 500]} />
+          </div>
+          <div style={{ width: '100%' }}>
+            <LineChart data={data} />
+          </div>
+        </Grid>
+      </div>
     );
   }
 }
