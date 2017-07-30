@@ -20,7 +20,7 @@ deploy:
     on:
       branch: master
   - provider: pages
-    repo: https://github.com/p-le/ts-react-tdd-storybook.git
+    repo: https://github.com/p-le/ts-react-tdd-storybook
     local_dir: .out
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
