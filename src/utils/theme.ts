@@ -15,7 +15,7 @@ export const theme: ITheme = {
     gridGutterWidth: 30,
 };
 
-const global = injectGlobal`
+export const global = injectGlobal`
     html {
         box-sizing: border-box;
         font-size: 100%;

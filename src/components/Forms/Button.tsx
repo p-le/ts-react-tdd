@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, mergeProps } from '../../utils/styled-components';
 
 interface IModifier {
     [key: string]: any;
@@ -61,7 +61,23 @@ interface IButtonProps {
     callbackFn?: () => void;
 }
 
-class Button extends React.Component<IButtonProps, {}> {
+const StyledButton = mergeProps<IButtonProps, HTMLButtonElement>(styled.button)`
+    ${props => modifier[props.modifier]}
+    appearance: none;
+    box-shadow: none;
+    outline: none;
+    border-radius: 2px;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+`;
+
+export class Button extends React.Component<IButtonProps, {}> {
     static defaultProps: Partial<IButtonProps> = {
         type: 'button',
         modifier: 'default',
@@ -69,27 +85,9 @@ class Button extends React.Component<IButtonProps, {}> {
 
     render() {
         return (
-            <button
-                className={this.props.className}
-                type={this.props.type}
-                onClick={this.props.callbackFn}
-            >
+            <StyledButton {...this.props} >
                 { this.props.value }
-            </button>
+            </StyledButton>
         );
     }
 }
-
-export const StyledButton = styled(Button)`
-    ${(props) => modifier[props.modifier]}
-    appearance: none;
-    box-shadow: none;
-    outline: none;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
-`;

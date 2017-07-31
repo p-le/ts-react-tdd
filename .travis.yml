@@ -6,12 +6,11 @@ before_script:
   - yarn install
 script:
   - yarn test
-before_deploy:
+after_success:
+  - cat __coverage__/lcov.info | ./node_modules/.bin/coveralls
   - yarn run build
   - yarn run build:storybook
 
-after_success:
-  - cat __coverage__/lcov.info | ./node_modules/.bin/coveralls
 deploy:
   - provider: pages
     local_dir: dist

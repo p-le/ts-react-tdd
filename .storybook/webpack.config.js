@@ -1,24 +1,15 @@
-const merge = require('webpack-merge');
-const path = require('path');
+const genDefaultConfig = require('@storybook/react/dist/server/config/defaults/webpack.config.js');
 
-const TARGET = process.env.npm_lifecycle_event;
+module.exports = (baseConfig, env) => {
+  const config = genDefaultConfig(baseConfig, env);
 
-module.exports = {
-  resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
-  },
-  module: {
-    rules: [
-      { 
-        enforce: "pre", 
-        test: /\.js$/, 
-        use: "source-map-loader" 
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: 'awesome-typescript-loader'
-      },
-    ],
-  },
+  config.module.rules.push({
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    use: 'awesome-typescript-loader'
+  });
+  
+  config.resolve.extensions.push('.ts', '.tsx');
+
+  return config;
 };

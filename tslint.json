@@ -34,7 +34,9 @@
         "jsx-curly-spacing": {
             "when": "never", 
             "children": true
-        }
+        },
+        "arrow-parens": [true, "ban-single-arg-parens"],
+        "no-empty": false
     },
     "rulesDirectory": []
 }
