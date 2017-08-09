@@ -82,7 +82,25 @@ export class Checkbox extends React.Component<ICheckboxProps, ICheckboxState> {
     });
   }
 
+  handleOn() {
+    if (!this.state.isChecked) {
+      this.setState({
+        isChecked: true,
+      });
+    }
+  }
+
+  handleOff() {
+    if (this.state.isChecked) {
+      this.setState({
+        isChecked: false,
+      });
+    }
+  }
+
   render() {
+    console.log(`render ${this.props.label}`);
+
     return (
       <div className={this.props.className}>
         <Label
