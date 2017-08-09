@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { css, mergeProps } from '../../utils/styled-components';
+import styled, { css, mergeProps } from '../../../utils/styled-components';
 
 interface IModifier {
     [key: string]: any;

@@ -5,13 +5,13 @@ import { action } from '@storybook/addon-actions';
 import { BasicMenu } from '../components/Navigation/BasicMenu';
 import { Dropdown } from '../components/Shared/Dropdown';
 
-import { Button } from '../components/Forms/Button';
+import { Button } from '../components/Forms/Button/button';
 import { Textarea } from '../components/Forms/Textarea';
-import { Checkbox } from '../components/Forms/Checkbox';
 
 import { Hr } from '../components/Shared/Hr';
 
 import { injectGlobal } from 'styled-components';
+import './styles.css';
 
 const CssDecorator = (storyFn: any) => {
   const globalCss = injectGlobal`
@@ -54,6 +54,15 @@ storiesOf('<Dropdown />', module)
       <Dropdown triggerFn={action('click')} />
     </div>)
   );
+storiesOf('<Grid />', module)
+  .add('Display grid', () => (
+    <div className='app-layout'>
+      <div className='tweets'>Tweets</div>
+      <div className='replies'>Replies</div>
+      <div className='search'>Search</div>
+      <div className='messages'>Messages</div>
+    </div>
+  ));
 
 storiesOf('Form Components', module)
   .add('<Button />', () => {
@@ -93,24 +102,3 @@ storiesOf('Form Components', module)
       </section>
     );
   })
-  .add('<Checkbox />', () => {
-    return (
-      <section>
-        <div>
-          <header>
-            <h4>Default Checkbox</h4>
-            <code>{`<Checkbox />`}</code>
-          </header>
-          <Checkbox id='test' label='demo' />
-        </div>
-        <Hr />
-        <div>
-          <header>
-            <h4>With callback</h4>
-            <code>{`<Checkbox />`}</code>
-          </header>
-          <Checkbox id='test' label='demo' onChange={action('With Callback')}/>
-        </div>
-      </section>
-    );
-  });
