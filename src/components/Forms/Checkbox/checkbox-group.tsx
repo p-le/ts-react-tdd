@@ -61,9 +61,13 @@ export class CheckboxGroup extends React.Component<{}, ICheckboxGroupState> {
     this.setState({
       isCheckedAll: !this.state.isCheckedAll,
     }, () => {
-      this.state.isCheckedAll ?
-        this.checkboxRefs.forEach(checkbox => checkbox.handleOn()) :
+      if (this.state.isCheckedAll) {
+        this.checkboxRefs.forEach(checkbox => checkbox.handleOn());
+        this.checkedItems = [].concat(this.list);
+      } else {
         this.checkboxRefs.forEach(checkbox => checkbox.handleOff());
+        this.checkedItems = [];
+      }
     });
   }
 
@@ -73,6 +77,7 @@ export class CheckboxGroup extends React.Component<{}, ICheckboxGroupState> {
 
   handleCheck(item: any) {
     const index = this.checkedItems.indexOf(item);
+
     if (index > -1) {
       this.checkedItems.splice(index, 1);
     } else {

@@ -99,8 +99,6 @@ export class Checkbox extends React.Component<ICheckboxProps, ICheckboxState> {
   }
 
   render() {
-    console.log(`render ${this.props.label}`);
-
     return (
       <div className={this.props.className}>
         <Label
