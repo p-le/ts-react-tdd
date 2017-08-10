@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { mergeProps } from '../../utils/styled-components';
+import styled, { mergeProps } from '../../../utils/styled-components';
 
 interface ITextareaProps {
   callbackFn?: () => any;

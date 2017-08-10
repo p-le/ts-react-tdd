@@ -80,7 +80,7 @@ const buildConfig = {
 
 switch(TARGET) {
   case 'start': 
-    console.log('> Dev Task'); 
+    console.log(`> Dev Task'`); 
     module.exports = merge(commonConfig, devConfig);
     break;
   case 'build': 
