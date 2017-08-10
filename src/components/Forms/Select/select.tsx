@@ -21,6 +21,7 @@ export interface ISelectProps {
 
 interface ISelectState {
   isOpen: boolean;
+  selectedValue: any;
 }
 
 export class Select extends React.Component<ISelectProps, ISelectState> {
@@ -35,6 +36,7 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
     super(props);
     this.state = {
       isOpen: false,
+      selectedValue: props.defaultValue,
     };
     this.selectItemRefs = [];
     this.selectItems = [];
@@ -68,6 +70,9 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
     if (typeof onSelectFn === 'function') {
       onSelectFn(option);
     }
+    this.setState({
+      selectedValue: option.value,
+    });
     this.toggleSelectList();
   }
 
@@ -81,7 +86,7 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
           key={option.key}
           onClick={this.handleSelect.bind(this, option)}
         >
-          {option.key}
+          {option.value}
         </SelectListItem>
       ));
     }
@@ -90,7 +95,7 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
       <Wrapper>
         { showLabel && <SelectLabel>{ label }</SelectLabel> }
         <SelectTriggerIcon name='arrow_drop_down' />
-        <SelectTrigger value={defaultValue} onClick={this.toggleSelectList} />
+        <SelectTrigger value={this.state.selectedValue} onClick={this.toggleSelectList} />
         <SelectList isOpen={this.state.isOpen}>
           { this.selectItems }
         </SelectList>

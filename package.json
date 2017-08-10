@@ -25,7 +25,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx,js,jsx}",
-      "!src/**/stories/*"
+      "!src/**/*.stories.{ts,tsx}"
     ],
     "coveragePathIgnorePatterns": [
       "src/index.tsx"
@@ -42,6 +42,7 @@
     "immutability-helper": "^2.3.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2",
     "react-transition-group": "^2.2.0",
     "styled-components": "^2.1.1",
     "typescript": "^2.4.2"
@@ -58,6 +59,7 @@
     "@types/node": "^8.0.17",
     "@types/react": "^15.6.0",
     "@types/react-dom": "^15.5.1",
+    "@types/react-router-dom": "^4.0.7",
     "@types/react-test-renderer": "^15.5.2",
     "@types/react-transition-group": "^2.0.2",
     "@types/storybook__addon-actions": "^3.0.1",
