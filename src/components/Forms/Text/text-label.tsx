@@ -19,7 +19,7 @@ export const TextLabel = mergeProps<ITextLabelProps, HTMLLabelElement>(styled.la
   top: 0;
   left: 0;
   height: 100%;
-  color: palevioletred;
+  color: ${props => props.theme.mainColor};
   font-size: 1rem;
   padding: 0 .2rem;
   cursor: text;

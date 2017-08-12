@@ -9,10 +9,18 @@ const sizes = {
 
 export interface ITheme {
     gridGutterWidth: number;
+    mainColor: string;
+    textColor: string;
+    topNavHeight: string;
+    shadow1: string;
 }
 
 export const theme: ITheme = {
     gridGutterWidth: 30,
+    mainColor: '#5da4dd',
+    textColor: 'white',
+    topNavHeight: '3rem',
+    shadow1: '0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)',
 };
 
 export const global = injectGlobal`
@@ -25,8 +33,14 @@ export const global = injectGlobal`
     }
     body {
         margin: 0;
+        height: 100vh;
     }
     *, *:before, *:after {
         box-sizing: inherit;
+    }
+
+    #app {
+        height: 100vh;
+        width: 100vw;
     }
 `;

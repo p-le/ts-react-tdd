@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Transition from 'react-transition-group/Transition';
 
 interface IDropdownProps {
+    isTransparent?: boolean;
     triggerFn: () => void;
 }
 
@@ -19,7 +20,7 @@ interface IDropdownContentProps {
 const DropdownWrapper = styled.div`
 `;
 
-const DropdownContent: React.StatelessComponent<IDropdownContentProps> = (props) => (
+const DropdownContent: React.SFC<IDropdownContentProps> = props => (
     <div className={props.className}>
         { props.children }
     </div>
@@ -52,9 +53,9 @@ const DropdownContentItem = styled.a`
 
 const StyledDropdownContent = styled(DropdownContent)`
     display: block;
-    opacity: ${(props) => props.isShow ? 1 : 0};
-    height: ${(props) => props.isShow ? 'auto' : 0};
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    opacity: ${props => props.isShow ? 1 : 0};
+    height: ${props => props.isShow ? 'auto' : 0};
+    box-shadow: ${props => props.theme.shadow};
     position: absolute;
     min-width: 10rem;
     z-index: 1;
