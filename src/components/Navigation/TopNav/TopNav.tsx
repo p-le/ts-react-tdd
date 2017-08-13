@@ -27,9 +27,6 @@ export class TopNav extends React.Component<{}, {}> {
             <Nav>
                 <NavIcon name='menu' />
                 <Logo src='http://153.120.11.149/images/logo.png'/>
-                <Dropdown triggerFn={console.log} />
-                <Dropdown triggerFn={console.log} />
-                <Dropdown triggerFn={console.log} />
             </Nav>
         );
     }

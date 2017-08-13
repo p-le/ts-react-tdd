@@ -51,7 +51,7 @@ export class Login extends React.Component<{}, ILoginState> {
                     <Password label='パスワード' name='password' value={password} onChange={this.handleOnChange} />
                     <Button modifier='primary' type='submit' value='ログイン' />
                 </Form>
-                { isRedirect && <Redirect to='/' />}
+                { isRedirect && <Redirect to='/manage' />}
             </LoginWrapper>
         );
     }

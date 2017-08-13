@@ -18,6 +18,6 @@ export const PrivateRoute: React.SFC<RouteProps> =
     if (isAuthenticated) {
         return <Route {...rest} render={renderComponent} />;
     } else {
-        return <Redirect to='login' />;
+        return <Redirect to='/login' />;
     }
 };

@@ -2,13 +2,13 @@ import * as React from 'react';
 import { AxiosResponse, AxiosError } from 'axios';
 import { Wrapper } from '../../components/Shared/FullWrapper';
 import { TopNav } from '../../components/Navigation/TopNav';
+import { SideNav, IMenuGroup } from '../../components/Navigation/SideNav';
 import { Footer, IFooterProps } from '../../components/Navigation/Footer';
 import { getAdList } from '../../services/ads';
+import { Switch, Route, RouteComponentProps } from 'react-router-dom';
+import { PrivateRoute } from '../../components/Auth/';
+import { AdCategory } from '../System';
 import styled from '../../utils/styled-components';
-
-interface IHomeState {
-    ads: any[];
-}
 
 const HomeWrapper = Wrapper.extend`
     display: flex;
@@ -16,15 +16,26 @@ const HomeWrapper = Wrapper.extend`
     flex-direction: column;
 `;
 
+const Main = styled.main`
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+`;
+
 const Content = styled.div`
     flex: 1;
 `;
 
-export class Home extends React.Component<{}, IHomeState> {
-    footerProps: IFooterProps;
+interface IHomeProps extends RouteComponentProps<any> {
+    name?: string;
+}
 
-    constructor() {
-        super();
+export class Home extends React.Component<IHomeProps, {}> {
+    footerProps: IFooterProps;
+    sideMenus: IMenuGroup[];
+
+    constructor(props: IHomeProps) {
+        super(props);
         this.state = {
             ads: [],
         };
@@ -37,6 +48,25 @@ export class Home extends React.Component<{}, IHomeState> {
                 { title: '問い合わせ', path: 'contact' },
             ],
         };
+        this.sideMenus = [
+            {
+                parent: { title: 'ホーム', path: '/' },
+                childs: [],
+            },
+            {
+                parent: { title: 'レポート', path: ''  },
+                childs: [
+                    { title: 'メディアオーナーレポート', path: '/media-owners/analytics' },
+                ],
+            },
+            {
+                parent: { title: 'システム管理', path: ''  },
+                childs: [
+                    { title: 'メディアカテゴリー一覧', path: `${props.match.url}/media-category` },
+                    { title: '広告カテゴリー一覧', path: `${props.match.url}/ad-category` },
+                ],
+            },
+        ];
     }
     componentDidMount() {
         getAdList()
@@ -49,14 +79,20 @@ export class Home extends React.Component<{}, IHomeState> {
 
             });
     }
+
     render() {
+        const { match } = this.props;
         return (
             <HomeWrapper>
                 <TopNav />
-                <Content>
-                    { this.props.children }
-                </Content>
-                { this.state.ads.map(ad => <div key={ad.id} >{ ad.name }</div>) }
+                <Main>
+                    <SideNav menu={this.sideMenus} />
+                    <Content>
+                        <Switch>
+                            <PrivateRoute path={`${match.url}/ad-category`} component={AdCategory} />
+                        </Switch>
+                    </Content>
+                </Main>
                 <Footer {...this.footerProps} />
             </HomeWrapper>
         );

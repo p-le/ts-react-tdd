@@ -36,7 +36,8 @@
             "children": true
         },
         "arrow-parens": [true, "ban-single-arg-parens"],
-        "no-empty": false
+        "no-empty": false,
+        "jsx-no-lambda": false
     },
     "rulesDirectory": []
 }

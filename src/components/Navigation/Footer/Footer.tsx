@@ -20,10 +20,13 @@ const StyledFooter = styled.footer`
     color: #fff;
     font-size: 0.8rem;
     height: 2.5rem;
+    box-shadow: ${props => props.theme.shadow};
 `;
+
 const Nav = styled.nav`
     height: 100%;
 `;
+
 const Ul = styled.ul`
     display: inline;
     list-style-type: none;

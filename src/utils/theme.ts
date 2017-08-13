@@ -38,6 +38,11 @@ export const global = injectGlobal`
     *, *:before, *:after {
         box-sizing: inherit;
     }
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
 
     #app {
         height: 100vh;
