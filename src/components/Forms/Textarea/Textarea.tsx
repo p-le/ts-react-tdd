@@ -11,18 +11,14 @@ const StyledTextArea = mergeProps<ITextareaProps, HTMLTextAreaElement>(styled.te
   height: 12rem;
   appearance: none;
   margin: 0;
-  padding: .8rem 1rem;
+  padding: .6rem .2rem;
   min-height: 8rem;
   max-height: 24rem;
   resize: vertical;
   line-height: 1.3;
-  width: ${props => props.fullWidth ? '100%' : 'auto'};
-  border: 2px solid #AAB2BD;
+  width: 100%;
+  border: 2px solid ${props => props.theme.mainColor};
   transition: border .3s ease;
-
-  &:focus {
-    border: 2px solid #4FC1E9;
-  }
 `;
 
 export class Textarea extends React.Component<ITextareaProps, {}> {

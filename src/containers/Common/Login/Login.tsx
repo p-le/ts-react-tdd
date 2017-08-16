@@ -46,7 +46,7 @@ export class Login extends React.Component<{}, ILoginState> {
         const { email, password, isRedirect } = this.state;
         return (
             <LoginWrapper>
-                <Form name='loginForm' role='login-form' onSubmit={this.handleOnSubmit}>
+                <Form name='loginForm' role='login-form' onSubmit={this.handleOnSubmit} >
                     <Text label='メール' name='email' value={email} onChange={this.handleOnChange} />
                     <Password label='パスワード' name='password' value={password} onChange={this.handleOnChange} />
                     <Button modifier='primary' type='submit' value='ログイン' />

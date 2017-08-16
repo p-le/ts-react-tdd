@@ -16,11 +16,17 @@ export interface IMenuGroupProps {
     menu: IMenuGroup;
 }
 
-export const MenuGroup: React.SFC<IMenuGroupProps> = ({ menu }) => (
-    <div>
-        <header><Link to={menu.parent.path}>{ menu.parent.title }</Link></header>
-        <ul>
-            { menu.childs.map(item => <li key={item.path}><Link to={item.path}>{ item.title }</Link></li>)}
-        </ul>
-    </div>
-);
+export const MenuGroup: React.SFC<IMenuGroupProps> = ({ menu }) => {
+    const lis = menu.childs.map(item =>
+        <li key={item.path}><Link replace={true} to={item.path}>{ item.title }</Link></li>
+    );
+
+    return (
+        <div>
+            <header><Link to={menu.parent.path} replace={true}>{ menu.parent.title }</Link></header>
+            <ul>
+                { lis }
+            </ul>
+        </div>
+    );
+};
