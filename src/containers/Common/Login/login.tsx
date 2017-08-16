@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AxiosResponse } from 'axios';
 import { Redirect } from 'react-router-dom';
-import { LoginWrapper } from './login-wrapper';
+import { LoginWrapper } from './LoginWrapper';
 import { Form } from '../../../components/Forms/Form';
 import { Text, Password } from '../../../components/Forms/Text';
 import { Button } from '../../../components/Forms/Button';
@@ -51,7 +51,7 @@ export class Login extends React.Component<{}, ILoginState> {
                     <Password label='パスワード' name='password' value={password} onChange={this.handleOnChange} />
                     <Button modifier='primary' type='submit' value='ログイン' />
                 </Form>
-                { isRedirect && <Redirect to='/manage' />}
+                { isRedirect && <Redirect to='/manage' /> }
             </LoginWrapper>
         );
     }

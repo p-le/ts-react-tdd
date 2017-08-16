@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Switch, Route, RouteComponentProps } from 'react-router-dom';
 
-import { AdCategoryRegister} from './AdCategoryRegister';
+import { AdCategoryCreate} from './AdCategoryCreate';
 import { AdCategoryUpdate} from './AdCategoryUpdate';
 import { AdCategoryList} from './AdCategoryList';
 
@@ -22,8 +22,8 @@ export class AdCategory extends React.Component<IAdCategoryProps, {}> {
         return (
             <Div>
                 <Switch>
-                    <Route path={`${this.props.match.url}/`} component={AdCategoryList} />
-                    <Route path={`${this.props.match.url}/create`} component={AdCategoryRegister} />
+                    <Route exact={true} path={`${this.props.match.url}/`} component={AdCategoryList} />
+                    <Route path={`${this.props.match.url}/create`} component={AdCategoryCreate} />
                     <Route path={`${this.props.match.url}/update`} component={AdCategoryUpdate} />
                 </Switch>
             </Div>

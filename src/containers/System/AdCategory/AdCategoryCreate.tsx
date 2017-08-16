@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class AdCategoryRegister extends React.Component<{}, {}> {
+export class AdCategoryCreate extends React.Component<{}, {}> {
     render() {
         return (
             <form>
