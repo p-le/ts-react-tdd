@@ -8,22 +8,26 @@ import { getAdList } from '../../services/ads';
 import { Switch, Route, RouteComponentProps } from 'react-router-dom';
 import { PrivateRoute } from '../../components/Auth/';
 import { AdCategory } from '../System';
+import { Affiliate } from '../Ad';
 import styled from '../../utils/styled-components';
 
 const HomeWrapper = Wrapper.extend`
     display: flex;
-    min-height: 100vh;
+    max-height: 100vh;
     flex-direction: column;
+    overflow: hidden;
 `;
 
 const Main = styled.main`
     display: flex;
     flex: 1;
     flex-direction: row;
+    overflow: hidden;
 `;
 
 const Content = styled.div`
     flex: 1;
+    overflow-y: auto;
 `;
 
 interface IHomeProps extends RouteComponentProps<any> {
@@ -60,6 +64,12 @@ export class Home extends React.Component<IHomeProps, {}> {
                 ],
             },
             {
+                parent: { title: '広告管理', path: '' },
+                childs: [
+                    { title: 'アフィリエイト広告一覧', path: `${props.match.url}/affiliate` },
+                ],
+            },
+            {
                 parent: { title: 'システム管理', path: ''  },
                 childs: [
                     { title: 'メディアカテゴリー一覧', path: `${props.match.url}/media-category` },
@@ -90,6 +100,7 @@ export class Home extends React.Component<IHomeProps, {}> {
                     <Content>
                         <Switch>
                             <PrivateRoute path={`${match.url}/ad-category`} component={AdCategory} />
+                            <PrivateRoute path={`${match.url}/affiliate`} component={Affiliate} />
                         </Switch>
                     </Content>
                 </Main>

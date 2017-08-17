@@ -1,22 +1,19 @@
 import * as React from 'react';
 
 import styled from '../../../utils/styled-components';
-import { SelectList, SelectListItem } from './select-list';
-import { SelectTrigger, SelectTriggerIcon } from './select-trigger';
-import { SelectLabel } from './select-label';
+import { SelectList, SelectListItem } from './SelectList';
+import { SelectTrigger, SelectTriggerIcon } from './SelectTrigger';
+import { SelectLabel } from './SelectLabel';
 import { Wrapper } from '../Wrapper';
 
-interface IOption {
-  key: string;
-  value: any;
-}
-
-export interface ISelectProps {
+export interface ISelectProps<T> {
   label: string;
   showLabel?: boolean;
-  options: IOption[];
+  options: T[];
   defaultValue: string;
-  onSelectFn?: (option?: IOption) => void;
+  onSelectFn?: (option?: T) => void;
+  bindValueKey?: string;
+  bindLabelKey?: string;
 }
 
 interface ISelectState {
@@ -24,15 +21,17 @@ interface ISelectState {
   selectedValue: any;
 }
 
-export class Select extends React.Component<ISelectProps, ISelectState> {
-  static defaultProps: Partial<ISelectProps> = {
+export class Select<T> extends React.Component<ISelectProps<T>, ISelectState> {
+  static defaultProps: Partial<ISelectProps<any>> = {
     showLabel: true,
+    bindLabelKey: 'id',
+    bindValueKey: 'name',
   };
 
   selectItemRefs: HTMLElement[];
   selectItems: JSX.Element[];
 
-  constructor(props: ISelectProps) {
+  constructor(props: any) {
     super(props);
     this.state = {
       isOpen: false,
@@ -65,13 +64,13 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
     this.selectItemRefs.push(item);
   }
 
-  handleSelect(option: IOption) {
+  handleSelect(option: any) {
     const { onSelectFn } = this.props;
     if (typeof onSelectFn === 'function') {
       onSelectFn(option);
     }
     this.setState({
-      selectedValue: option.value,
+      selectedValue: option[this.props.bindValueKey],
     });
     this.toggleSelectList();
   }
@@ -80,13 +79,13 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
     const { label, showLabel, options, defaultValue } = this.props;
 
     if (this.selectItems.length === 0 && options.length > 0) {
-      this.selectItems = options.map(option => (
+      this.selectItems = options.map((option: any) => (
         <SelectListItem
           innerRef={this.handleItemRef}
-          key={option.key}
+          key={option[this.props.bindLabelKey]}
           onClick={this.handleSelect.bind(this, option)}
         >
-          {option.value}
+          {option[this.props.bindValueKey]}
         </SelectListItem>
       ));
     }

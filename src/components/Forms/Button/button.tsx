@@ -68,7 +68,8 @@ const StyledButton = mergeProps<IButtonProps, HTMLButtonElement>(styled.button)`
     outline: none;
     border-radius: 2px;
     color: white;
-    padding: 0.7rem 1.5rem;
+    padding: 0.5rem 1.3rem;
+    margin: 0 1rem;
     font-size: 1rem;
     cursor: pointer;
     font-weight: bold;

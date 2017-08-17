@@ -19,4 +19,8 @@ export class AxiosFactory {
         instance.defaults.headers.common.Authorization = `Bearer ${token}`;
         return instance;
     }
+
+    static createCancelToken() {
+        return axios.CancelToken;
+    }
 }

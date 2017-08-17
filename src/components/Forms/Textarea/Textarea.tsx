@@ -1,30 +1,58 @@
 import * as React from 'react';
+import { TextareaLabel } from './TextareaLabel';
+import { TextareaInput } from './TextareaInput';
+import { Wrapper } from '../Wrapper';
 import styled, { mergeProps } from '../../../utils/styled-components';
 
-interface ITextareaProps {
+type IHTMLTextareaProps = React.HTMLProps<HTMLTextAreaElement>;
+
+interface ITextareaProps extends IHTMLTextareaProps {
   callbackFn?: () => any;
   fullWidth?: boolean;
 }
 
-const StyledTextArea = mergeProps<ITextareaProps, HTMLTextAreaElement>(styled.textarea)`
-  outline: none;
-  height: 12rem;
-  appearance: none;
-  margin: 0;
-  padding: .6rem .2rem;
-  min-height: 8rem;
-  max-height: 24rem;
-  resize: vertical;
-  line-height: 1.3;
-  width: 100%;
-  border: 2px solid ${props => props.theme.mainColor};
-  transition: border .3s ease;
-`;
+interface ITextareaState {
+  isFocus: boolean;
+  isValueExist: boolean;
+}
 
-export class Textarea extends React.Component<ITextareaProps, {}> {
+export class Textarea extends React.Component<ITextareaProps, ITextareaState> {
+  constructor(props: ITextareaProps) {
+    super(props);
+    this.state = {
+      isFocus: false,
+      isValueExist: false,
+    };
+    this.handleOnFocus = this.handleOnFocus.bind(this);
+    this.handleOnBlur = this.handleOnBlur.bind(this);
+  }
+
+  handleOnFocus() {
+    this.setState({
+      isFocus: true,
+    });
+  }
+
+  handleOnBlur(event: React.SyntheticEvent<HTMLTextAreaElement>) {
+    this.setState({
+      isFocus: false,
+      isValueExist: (event.currentTarget.value) ? true : false,
+    });
+  }
+
   render() {
+    const { isFocus, isValueExist } = this.state;
     return (
-      <StyledTextArea {...this.props} />
+      <Wrapper>
+        <TextareaLabel isFocus={isFocus} isValueExist={isValueExist}>{this.props.label}</TextareaLabel>
+        <TextareaInput
+          name={this.props.name}
+          value={this.props.value}
+          onFocus={this.handleOnFocus}
+          onBlur={this.handleOnBlur}
+          onChange={this.props.onChange}
+        />
+      </Wrapper>
     );
   }
 }

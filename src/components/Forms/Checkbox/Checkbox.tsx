@@ -1,9 +1,13 @@
 import * as React from 'react';
 import styled, { mergeProps } from '../../../utils/styled-components';
 
+type IGetter = (datum: any) => string;
+
 interface ICheckboxProps {
   label: string;
+  labelGetter?: IGetter;
   name: string;
+  nameGetter?: IGetter;
   className?: string;
   isChecked?: boolean;
   onChange?: (selectItem?: any) => any;
@@ -30,7 +34,7 @@ const Label = styled.label`
   font-size: 1rem;
   user-select: none;
   cursor: pointer;
-  color: palevioletred;
+  color: ${props => props.theme.mainColor};
 
   &:before {
     content: '';
@@ -48,20 +52,21 @@ const Label = styled.label`
         return `
           border-top: 2px solid transparent;
           border-left: 2px solid transparent;
-          border-right: 2px solid palevioletred;
-          border-bottom: 2px solid palevioletred;
+          border-right: 2px solid ${props.theme.mainColor};
+          border-bottom: 2px solid ${props.theme.mainColor};
           transform: rotate(40deg);
           transform-origin: 100% 50%;
         `;
       } else {
-        return 'border: 2px solid palevioletred';
+        return `border: 2px solid ${props.theme.mainColor}`;
       }
     }}
   }
-
 `;
 
-export class Checkbox extends React.Component<ICheckboxProps, ICheckboxState> {
+type IInputProps = React.HTMLProps<HTMLInputElement>;
+
+export class Checkbox extends React.Component<ICheckboxProps & IInputProps, ICheckboxState> {
   static defaultProps: Partial<ICheckboxProps> = {
     isChecked: false,
     onChange: () => {},

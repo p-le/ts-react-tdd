@@ -3,8 +3,8 @@ import * as React from 'react';
 import { storiesOf, addDecorator  } from '@storybook/react';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import styled, { injectGlobal, ThemeProvider } from 'styled-components';
-import { Checkbox } from './checkbox';
-import { CheckboxGroup } from './checkbox-group';
+import { Checkbox } from './Checkbox';
+import { CheckboxGroup } from './CheckboxGroup';
 
 const CssDecorator = (storyFn: any) => {
   const globalCss = injectGlobal`

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Checkbox } from './checkbox';
+import { Checkbox } from './Checkbox';
+import { Wrapper } from '../Wrapper';
 import styled from '../../../utils/styled-components';
 
 interface ICheckboxGroupState {
@@ -108,15 +109,10 @@ export class CheckboxGroup extends React.Component<{}, ICheckboxGroupState> {
 
   render() {
     return (
-      <div>
-        <StyledCheckbox
-          label='All'
-          name='all'
-          onChange={this.handleToggleAll}
-          innerRef={this.handleTriggerRef}
-        />
+      <Wrapper>
+        <StyledCheckbox label='All' name='all' onChange={this.handleToggleAll} innerRef={this.handleTriggerRef} />
         { this.checkboxes }
-      </div>
+      </Wrapper>
     );
   }
 }

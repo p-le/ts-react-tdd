@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { AxiosResponse, AxiosError, CancelTokenSource } from 'axios';
-import { AxiosFactory } from '../../../utils/axios';
-import { DataList } from '../../../components/DataList';
+import { AxiosResponse, AxiosError, CancelTokenStatic } from 'axios';
+import { AxiosFactory } from '../../utils/axios';
+import { DataList } from '../../components/DataList';
 
 interface IAdCategory {
     id: number;
     name: string;
 }
 
-interface IAdCategoryListState {
+interface IAffiliateListState {
     isFetching: boolean;
     adCategories: IAdCategory[];
 }
 
-export class AdCategoryList extends React.Component<RouteComponentProps<any>, IAdCategoryListState> {
-    source: CancelTokenSource;
+export class AffiliateList extends React.Component<RouteComponentProps<any>, IAffiliateListState> {
 
     constructor() {
         super();
@@ -23,22 +22,15 @@ export class AdCategoryList extends React.Component<RouteComponentProps<any>, IA
             isFetching: true,
             adCategories: [],
         };
-        this.source = AxiosFactory.createCancelToken().source();
     }
     componentDidMount() {
         AxiosFactory.createAuthInstance()
-            .get('/ad-category', {
-                cancelToken: this.source.token,
-            })
+            .get('/ad-category')
             .then((res: AxiosResponse) => this.setState({
                 isFetching: false,
                 adCategories: res.data,
             }))
             .catch((err: AxiosError) => console.log(err));
-    }
-
-    componentWillUnmount() {
-        this.source.cancel('リクエストをキャンセル');
     }
 
     render() {

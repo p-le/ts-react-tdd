@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf, addDecorator  } from '@storybook/react';
 import { withKnobs, text, boolean, number, select, object } from '@storybook/addon-knobs';
 import styled, { injectGlobal, ThemeProvider } from 'styled-components';
-import { Select } from './select';
+import { Select } from './Select';
 
 storiesOf('<Select />', module)
   .add('Single', () => {

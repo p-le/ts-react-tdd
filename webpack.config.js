@@ -67,7 +67,7 @@ const devConfig = {
     host: "0.0.0.0",
     compress: true,
     historyApiFallback: true,
-    port: 9000
+    port: 9001
   }
 };
 

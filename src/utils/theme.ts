@@ -30,10 +30,12 @@ export const global = injectGlobal`
         min-width: 320px;
         font-family: Arial;
         line-height: 1.5;
+        overflow: hidden;
     }
     body {
         margin: 0;
         height: 100vh;
+        overflow: hidden !important;
     }
     *, *:before, *:after {
         box-sizing: inherit;
@@ -47,5 +49,6 @@ export const global = injectGlobal`
     #app {
         height: 100vh;
         width: 100vw;
+        overflow: hidden;
     }
 `;
