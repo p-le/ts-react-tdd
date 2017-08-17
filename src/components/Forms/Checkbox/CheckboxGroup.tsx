@@ -3,6 +3,16 @@ import { Checkbox } from './Checkbox';
 import { Wrapper } from '../Wrapper';
 import styled from '../../../utils/styled-components';
 
+export interface ICheckbox {
+  key: number | string;
+  value: string;
+}
+
+interface ICheckboxGroupProps {
+  options?: ICheckbox[];
+  name: string;
+}
+
 interface ICheckboxGroupState {
   isCheckedAll: boolean;
 }
@@ -11,30 +21,16 @@ const StyledCheckbox = styled(Checkbox)`
   margin: 0.3rem;
 `;
 
-export class CheckboxGroup extends React.Component<{}, ICheckboxGroupState> {
+export class CheckboxGroup extends React.Component<ICheckboxGroupProps, ICheckboxGroupState> {
   list: any[];
 
   checkboxRefs: Checkbox[];
   triggerRef: Checkbox;
 
   checkedItems: any[];
-  checkboxes: JSX.Element[];
 
   constructor() {
     super();
-    this.list = [{
-      label: 'A',
-      name: 'a',
-    }, {
-      label: 'B',
-      name: 'b',
-    }, {
-      label: 'C',
-      name: 'c',
-    }, {
-      label: 'D',
-      name: 'd',
-    }];
 
     this.state = {
       isCheckedAll: false,
@@ -45,17 +41,6 @@ export class CheckboxGroup extends React.Component<{}, ICheckboxGroupState> {
     this.handleToggleAll = this.handleToggleAll.bind(this);
     this.handleRef = this.handleRef.bind(this);
     this.handleTriggerRef = this.handleTriggerRef.bind(this);
-    this.checkboxes = this.list.map(item =>
-      (
-        <StyledCheckbox
-          label={item.label}
-          name={item.name}
-          key={item.name}
-          innerRef={this.handleRef}
-          onChange={this.handleCheck.bind(this, item)}
-        />
-      )
-    );
   }
 
   handleToggleAll(e: Event) {
@@ -108,10 +93,19 @@ export class CheckboxGroup extends React.Component<{}, ICheckboxGroupState> {
   }
 
   render() {
+    const checkboxes: JSX.Element[] = this.props.options.map(option => (
+      <StyledCheckbox
+        label={option.value}
+        name={`${option.key}-${this.props.name}`}
+        key={option.key}
+        innerRef={this.handleRef}
+        onChange={this.handleCheck.bind(this, option)}
+      />
+    ));
     return (
       <Wrapper>
         <StyledCheckbox label='All' name='all' onChange={this.handleToggleAll} innerRef={this.handleTriggerRef} />
-        { this.checkboxes }
+        { checkboxes }
       </Wrapper>
     );
   }

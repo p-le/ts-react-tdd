@@ -10,6 +10,7 @@ export const SelectList = mergeProps<ISelectListProps, HTMLUListElement>(styled.
   position: absolute;
   list-style-type: none;
   max-height: 20rem;
+  overflow-y: auto;
   z-index: 999;
   top: 0px;
   left: 0px;
@@ -21,11 +22,11 @@ export const SelectList = mergeProps<ISelectListProps, HTMLUListElement>(styled.
 
 export const SelectListItem = styled.li`
   cursor: pointer;
-  color: palevioletred;
-  line-height: 3rem;
-  height: 3rem;
-  padding: 0 .4rem;
-  font-weight: bold;
+  color: ${props => props.theme.mainColor};
+  line-height: 2.5rem;
+  height: 2.5rem;
+  padding: 0 .6rem;
+  font-size: .8rem;
 
   &:hover {
     background-color: rgba(0, 0, 0, .06);

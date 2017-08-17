@@ -6,11 +6,10 @@ const StyledForm = styled.form`
     overflow: hidden;
     width: 23rem;
 `;
+
 type HTMLFormProps = React.HTMLProps<HTMLFormElement>;
-interface IFormProps {
-    hard?: boolean;
-}
-export class Form extends React.Component<IFormProps & HTMLFormProps, {}> {
+
+export class Form extends React.Component<HTMLFormProps, {}> {
     render() {
         return (
             <StyledForm onSubmit={this.props.onSubmit}>

@@ -9,6 +9,7 @@ export const SelectLabel = styled.label`
   cursor: text;
   font-weight: bold;
   pointer-events: none;
-  transform: translateY(-14px) scale(.7);
+  transform: translateY(-1.2rem) scale(.7);
+  color: ${props => props.theme.mainColor};
   transform-origin: 0 0;
 `;

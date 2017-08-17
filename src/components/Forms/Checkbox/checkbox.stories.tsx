@@ -48,6 +48,6 @@ storiesOf('<Checkbox />', module)
   })
   .add('Group', () => {
     return (
-      <CheckboxGroup />
+      <CheckboxGroup name='test' />
     );
   });

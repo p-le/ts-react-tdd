@@ -6,14 +6,16 @@ import { SelectTrigger, SelectTriggerIcon } from './SelectTrigger';
 import { SelectLabel } from './SelectLabel';
 import { Wrapper } from '../Wrapper';
 
-export interface ISelectProps<T> {
+export interface ISelectOption {
+  key: number | string;
+  value: string;
+}
+export interface ISelectProps {
   label: string;
   showLabel?: boolean;
-  options: T[];
+  options: ISelectOption[];
   defaultValue: string;
-  onSelectFn?: (option?: T) => void;
-  bindValueKey?: string;
-  bindLabelKey?: string;
+  onSelectFn?: (option?: ISelectOption) => void;
 }
 
 interface ISelectState {
@@ -21,15 +23,12 @@ interface ISelectState {
   selectedValue: any;
 }
 
-export class Select<T> extends React.Component<ISelectProps<T>, ISelectState> {
-  static defaultProps: Partial<ISelectProps<any>> = {
+export class Select extends React.Component<ISelectProps, ISelectState> {
+  static defaultProps: Partial<ISelectProps> = {
     showLabel: true,
-    bindLabelKey: 'id',
-    bindValueKey: 'name',
   };
 
   selectItemRefs: HTMLElement[];
-  selectItems: JSX.Element[];
 
   constructor(props: any) {
     super(props);
@@ -38,7 +37,6 @@ export class Select<T> extends React.Component<ISelectProps<T>, ISelectState> {
       selectedValue: props.defaultValue,
     };
     this.selectItemRefs = [];
-    this.selectItems = [];
     this.toggleSelectList = this.toggleSelectList.bind(this);
     this.clickOutsideHandler = this.clickOutsideHandler.bind(this);
     this.handleItemRef = this.handleItemRef.bind(this);
@@ -70,7 +68,7 @@ export class Select<T> extends React.Component<ISelectProps<T>, ISelectState> {
       onSelectFn(option);
     }
     this.setState({
-      selectedValue: option[this.props.bindValueKey],
+      selectedValue: option.value,
     });
     this.toggleSelectList();
   }
@@ -78,17 +76,15 @@ export class Select<T> extends React.Component<ISelectProps<T>, ISelectState> {
   render() {
     const { label, showLabel, options, defaultValue } = this.props;
 
-    if (this.selectItems.length === 0 && options.length > 0) {
-      this.selectItems = options.map((option: any) => (
-        <SelectListItem
-          innerRef={this.handleItemRef}
-          key={option[this.props.bindLabelKey]}
-          onClick={this.handleSelect.bind(this, option)}
-        >
-          {option[this.props.bindValueKey]}
-        </SelectListItem>
-      ));
-    }
+    const selectItems: JSX.Element[] = options.map((option: any) => (
+      <SelectListItem
+        innerRef={this.handleItemRef}
+        key={option.key}
+        onClick={this.handleSelect.bind(this, option)}
+      >
+        {option.value}
+      </SelectListItem>
+    ));
 
     return (
       <Wrapper>
@@ -96,7 +92,7 @@ export class Select<T> extends React.Component<ISelectProps<T>, ISelectState> {
         <SelectTriggerIcon name='arrow_drop_down' />
         <SelectTrigger value={this.state.selectedValue} onClick={this.toggleSelectList} />
         <SelectList isOpen={this.state.isOpen}>
-          { this.selectItems }
+          { selectItems }
         </SelectList>
       </Wrapper>
     );

@@ -6,6 +6,7 @@ export const SelectTrigger = styled(TextInput).attrs({
   readOnly: true,
 })`
   cursor: pointer;
+  font-size: .8rem;
 `;
 
 export const SelectTriggerIcon = styled(Icon)`
