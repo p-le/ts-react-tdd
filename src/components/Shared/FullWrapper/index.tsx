@@ -1,1 +1,1 @@
-export * from './full-wrapper';
+export * from './FullWrapper';

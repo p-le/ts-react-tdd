@@ -6,6 +6,7 @@ import { Text } from '../../components/Forms/Text';
 import { Textarea } from '../../components/Forms/Textarea';
 import { Checkbox, CheckboxGroup } from '../../components/Forms/Checkbox';
 import { Select } from '../../components/Forms/Select';
+import { Spinner } from '../../components/Shared/Spinner';
 
 import { getMediaCategoryList } from '../../services/media-category';
 
@@ -100,6 +101,7 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                 <Text label='広告名' name='name' value={this.state.name} onChange={this.handleOnChange} />
                 <Textarea name='note' value={this.state.note} label='備考' onChange={this.handleOnChange} />
                 <Textarea name='admin_note' value={this.state.admin_note} label='経営者参考' onChange={this.handleOnChange}/>
+                <Spinner />
             </Form>
         );
     }
