@@ -1,5 +1,5 @@
 import styled from '../../../utils/styled-components';
-import { Text } from './text';
+import { Text } from './Text';
 
 interface ITextProps {
   type?: string;

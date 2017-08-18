@@ -1,2 +1,2 @@
-export * from './password';
-export * from './text';
+export * from './Password';
+export * from './Text';

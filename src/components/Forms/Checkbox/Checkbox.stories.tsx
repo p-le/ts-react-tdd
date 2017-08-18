@@ -47,7 +47,17 @@ storiesOf('<Checkbox />', module)
     );
   })
   .add('Group', () => {
+    const options = [
+      { key: 1, value: 'A' },
+      { key: 2, value: 'B' },
+      { key: 3, value: 'C' },
+      { key: 4, value: 'D' },
+    ];
+    const onSelect = (option: any) => {
+      console.log(option);
+    };
+
     return (
-      <CheckboxGroup name='test' />
+      <CheckboxGroup name='test' options={options} onSelect={onSelect}/>
     );
   });

@@ -27,3 +27,4 @@ typings/
 .env
 dist
 .out
+bash.exe.stackdump

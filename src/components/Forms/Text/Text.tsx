@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { TextLabel } from './text-label';
-import { TextInput } from './text-input';
+import { TextLabel } from './TextLabel';
+import { TextInput } from './TextInput';
 import { Wrapper } from '../Wrapper';
 import styled from '../../../utils/styled-components';
 

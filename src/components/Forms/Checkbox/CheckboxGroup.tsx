@@ -1,25 +1,17 @@
 import * as React from 'react';
-import { Checkbox } from './Checkbox';
+import { Checkbox, ICheckboxOption } from './Checkbox';
 import { Wrapper } from '../Wrapper';
 import styled from '../../../utils/styled-components';
 
-export interface ICheckbox {
-  key: number | string;
-  value: string;
-}
-
 interface ICheckboxGroupProps {
-  options?: ICheckbox[];
+  options: ICheckboxOption[];
+  onSelect: (option: ICheckboxOption) => void;
   name: string;
 }
 
 interface ICheckboxGroupState {
   isCheckedAll: boolean;
 }
-
-const StyledCheckbox = styled(Checkbox)`
-  margin: 0.3rem;
-`;
 
 export class CheckboxGroup extends React.Component<ICheckboxGroupProps, ICheckboxGroupState> {
   list: any[];
@@ -43,7 +35,11 @@ export class CheckboxGroup extends React.Component<ICheckboxGroupProps, ICheckbo
     this.handleTriggerRef = this.handleTriggerRef.bind(this);
   }
 
-  handleToggleAll(e: Event) {
+  /* ---------------------------------------------------------
+     ハンドラー関数
+  ------------------------------------------------------------ */
+
+  handleToggleAll(e: React.SyntheticEvent<any>) {
     this.setState({
       isCheckedAll: !this.state.isCheckedAll,
     }, () => {
@@ -55,10 +51,6 @@ export class CheckboxGroup extends React.Component<ICheckboxGroupProps, ICheckbo
         this.checkedItems = [];
       }
     });
-  }
-
-  isCheckedAll() {
-    return this.checkedItems.length === this.list.length;
   }
 
   handleCheck(item: any) {
@@ -85,26 +77,40 @@ export class CheckboxGroup extends React.Component<ICheckboxGroupProps, ICheckbo
     }
   }
 
-  handleRef(ref: Checkbox) {
+  handleRef(ref: any) {
     this.checkboxRefs.push(ref);
   }
-  handleTriggerRef(ref: Checkbox) {
+  handleTriggerRef(ref: any) {
     this.triggerRef = ref;
   }
+  /* ---------------------------------------------------------
+      ユーティリティ関数
+  ------------------------------------------------------------ */
+
+  isCheckedAll() {
+    return this.checkedItems.length === this.list.length;
+  }
+
+  /* ---------------------------------------------------------
+      コンポーネント描画する
+  ------------------------------------------------------------ */
 
   render() {
-    const checkboxes: JSX.Element[] = this.props.options.map(option => (
-      <StyledCheckbox
-        label={option.value}
-        name={`${option.key}-${this.props.name}`}
-        key={option.key}
-        innerRef={this.handleRef}
-        onChange={this.handleCheck.bind(this, option)}
+    const { options: data } = this.props;
+
+    const checkboxes: JSX.Element[] = data.map(datum => (
+      <Checkbox
+        label={datum.value}
+        name={`${datum.key}-${this.props.name}`}
+        key={datum.key}
+        ref={this.handleRef}
+        onChange={this.handleCheck.bind(this, datum)}
       />
     ));
+
     return (
       <Wrapper>
-        <StyledCheckbox label='All' name='all' onChange={this.handleToggleAll} innerRef={this.handleTriggerRef} />
+        <Checkbox label='All' name='all' onChange={this.handleToggleAll} ref={this.handleTriggerRef} />
         { checkboxes }
       </Wrapper>
     );

@@ -1,5 +1,5 @@
 import styled, { mergeProps } from '../../../utils/styled-components';
-import { TextInput } from '../Text/text-input';
+import { TextInput } from '../Text/TextInput';
 import { Icon } from '../../Shared/Icon';
 
 export const SelectTrigger = styled(TextInput).attrs({
@@ -16,4 +16,5 @@ export const SelectTriggerIcon = styled(Icon)`
   height: 100%;
   line-height: 1.5;
   z-index: -1;
+  color: ${props => props.theme.mainColor};
 `;
