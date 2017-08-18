@@ -21,8 +21,9 @@ interface IAffiliateCreateFormState {
     note: string;
     advertiserId: number;
     adCategoryId: number;
-    is_testing: number;
+    isTesting: number;
     optionApp: number;
+    payper: number;
     admin_note: string;
     os: number[];
     [key: string]: any;
@@ -45,10 +46,10 @@ interface IAffiliateCreateDataState {
       isFetching: boolean;
       data: ICheckboxOption[];
   };
+  paypers: ISelectOption[];
 }
 
 export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormState & IAffiliateCreateDataState> {
-    [ method: string]: any;
     source: CancelTokenSource;
 
     constructor() {
@@ -59,8 +60,9 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
             admin_note: '',
             advertiserId: 0,
             adCategoryId: 0,
-            is_testing: 1,
+            isTesting: 1,
             optionApp: 0,
+            payper: 4,
             os: [],
             advertisers: {
                 isFetching: true,
@@ -78,12 +80,19 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                 isFetching: true,
                 data: [],
             },
+            paypers: [
+                { key: 3, value: 'クリック報酬' },
+                { key: 4, value: '成果報酬' },
+                { key: 5, value: 'クリック＆成果報酬' },
+            ],
         };
 
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSelectAdvertiser = this.handleOnSelectAdvertiser.bind(this);
         this.handleOnSelectAdCategory = this.handleOnSelectAdCategory.bind(this);
+        this.handleSelectIsTesting = this.handleSelectIsTesting.bind(this);
         this.handleSelectOs = this.handleSelectOs.bind(this);
+        this.handleSelectPayper = this.handleSelectPayper.bind(this);
         this.source = AxiosFactory.createCancelToken().source();
     }
 
@@ -115,11 +124,19 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                     data: this.transformResponse(res.data),
                 },
             }));
+
         getOsList(this.source.token)
             .then((res: AxiosResponse) => this.setState({
                 oses: {
                     isFetching: false,
-                    data: this.transformResponse(res.data),
+                    data: res.data.map((datum: any) => {
+                        const option: ICheckboxOption = {
+                            key: datum.id,
+                            value: `[${datum.id}] ${datum.name}`,
+                            checked: false,
+                        };
+                        return option;
+                    }),
                 },
             }));
     }
@@ -150,6 +167,12 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
         });
     }
 
+    handleSelectIsTesting(option: ICheckboxOption) {
+        if (this.state.isTesting === 1) {
+
+        }
+    }
+
     handleSelectOs(option: ICheckboxOption) {
         if (this.state.os.indexOf(option.key as number)) {
             update(this.state, {
@@ -160,6 +183,12 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                 os: { $push: [option.key] },
             });
         }
+    }
+
+    handleSelectPayper(option: ISelectOption) {
+        this.setState({
+            payper: option.key as number,
+        });
     }
     /* ---------------------------------------------------------
         ユーティリティ関数
@@ -181,7 +210,12 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
     render() {
         return (
             <Form>
-                <Checkbox label='テスト' name='is_testing' value={this.state.is_testing} single={true} />
+                <Checkbox
+                    label='テスト'
+                    name='is_testing'
+                    value={this.state.isTesting}
+                    single={true}
+                />
                 <Text label='広告名' name='name' value={this.state.name} onChange={this.handleOnChange} />
                 <Select
                     defaultValue='広告主を選択する'
@@ -198,6 +232,12 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                 <Datetime />
                 <CheckboxGroup name='os' options={this.state.oses.data} onSelect={this.handleSelectOs} />
                 <Checkbox label='アプリ広告' name='option_app' value={this.state.optionApp} single={true} />
+                <Select
+                    defaultValue='成果報酬'
+                    options={this.state.paypers}
+                    label='報酬タイプ'
+                    onSelectFn={this.handleSelectPayper}
+                />
                 <Textarea name='note' value={this.state.note} label='備考' onChange={this.handleOnChange} />
                 <Textarea name='admin_note' value={this.state.admin_note} label='経営者参考' onChange={this.handleOnChange}/>
             </Form>

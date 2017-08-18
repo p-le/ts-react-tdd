@@ -48,10 +48,10 @@ storiesOf('<Checkbox />', module)
   })
   .add('Group', () => {
     const options = [
-      { key: 1, value: 'A' },
-      { key: 2, value: 'B' },
-      { key: 3, value: 'C' },
-      { key: 4, value: 'D' },
+      { key: 1, value: 'A', checked: false },
+      { key: 2, value: 'B', checked: false },
+      { key: 3, value: 'C', checked: false },
+      { key: 4, value: 'D', checked: false },
     ];
     const onSelect = (option: any) => {
       console.log(option);

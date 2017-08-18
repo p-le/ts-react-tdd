@@ -10,7 +10,7 @@ export const PrivateRoute: React.SFC<RouteProps> =
     let isAuthenticated = true;
 
     if (Cookies.get('token')) {
-        checkToken().then(result => isAuthenticated = result);
+        checkToken().then(result => isAuthenticated = true);
     } else {
         isAuthenticated = false;
     }

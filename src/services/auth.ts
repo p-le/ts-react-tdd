@@ -9,13 +9,6 @@ export const login = (email: string, password: string) => {
         });
 };
 
-export const checkToken = async () => {
-    let isValid = true;
-    try {
-        await AxiosFactory.createAuthInstance().post(`/auth/token`, {});
-    } catch (error) {
-        isValid = false;
-    }
-
-    return isValid;
+export const checkToken = () => {
+    return AxiosFactory.createAuthInstance().post(`/auth/token`, {});
 };

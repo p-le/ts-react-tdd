@@ -45,7 +45,9 @@ export const global = injectGlobal`
         margin: 0;
         list-style-type: none;
     }
-
+    a {
+        text-decoration: none;
+    }
     #app {
         height: 100vh;
         width: 100vw;

@@ -8,12 +8,14 @@ type IGetter = (datum: any) => string;
 export interface ICheckboxOption {
   key: number | string;
   value: string;
+  checked: boolean;
 }
 
 interface ICheckboxProps {
   label: string;
   name: string;
   single?: boolean;
+  checked?: boolean;
   className?: string;
   isChecked?: boolean;
   onChange?: (selectItem?: any) => any;
@@ -81,7 +83,7 @@ export class Checkbox extends React.Component<ICheckboxProps & IInputProps, IChe
         <CheckboxLabel
           htmlFor={this.props.name}
           onClick={this.handleOnChange}
-          checked={ this.state.isChecked }
+          checked={this.props.checked}
         >
           { this.props.label }
         </CheckboxLabel>
