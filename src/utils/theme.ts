@@ -27,6 +27,7 @@ export const global = injectGlobal`
     html {
         box-sizing: border-box;
         font-size: 100%;
+        font-family: "Noto Sans Japanese";
         min-width: 320px;
         font-family: Arial;
         line-height: 1.5;

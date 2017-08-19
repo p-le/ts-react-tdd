@@ -6,23 +6,16 @@ import { CheckboxLabel } from './CheckboxLabel';
 type IGetter = (datum: any) => string;
 
 export interface ICheckboxOption {
-  key: number | string;
-  value: string;
-  checked: boolean;
+  text: string;
+  value: string | number;
 }
 
 interface ICheckboxProps {
-  label: string;
   name: string;
   single?: boolean;
-  checked?: boolean;
-  className?: string;
-  isChecked?: boolean;
-  onChange?: (selectItem?: any) => any;
-}
-
-interface ICheckboxState {
-  isChecked: boolean;
+  option: ICheckboxOption;
+  checked: boolean;
+  onSelect: (option?: ICheckboxOption) => void;
 }
 
 const Div = styled.div`
@@ -37,57 +30,23 @@ const Input = styled.input.attrs({
   pointer-events: none;
 `;
 
-type IInputProps = React.HTMLProps<HTMLInputElement>;
-
-export class Checkbox extends React.Component<ICheckboxProps & IInputProps, ICheckboxState> {
+export class Checkbox extends React.Component<ICheckboxProps, {}> {
   static defaultProps: Partial<ICheckboxProps> = {
-    isChecked: false,
     single: false,
-    onChange: () => {},
   };
 
-  constructor(props: ICheckboxProps) {
-    super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.state = {
-      isChecked: false,
-    };
-  }
-
-  handleOnChange() {
-    this.props.onChange();
-    this.setState({
-      isChecked: !this.state.isChecked,
-    });
-  }
-
-  handleOn() {
-    if (!this.state.isChecked) {
-      this.setState({
-        isChecked: true,
-      });
-    }
-  }
-
-  handleOff() {
-    if (this.state.isChecked) {
-      this.setState({
-        isChecked: false,
-      });
-    }
-  }
-
   renderCheckbox(): JSX.Element {
+    const { name, option, checked } = this.props;
     return (
       <Div>
         <CheckboxLabel
-          htmlFor={this.props.name}
-          onClick={this.handleOnChange}
-          checked={this.props.checked}
+          htmlFor={name}
+          checked={checked}
+          onClick={this.props.onSelect.bind(this, option)}
         >
-          { this.props.label }
+          { option.text }
         </CheckboxLabel>
-        <Input id={this.props.name} />
+        <Input id={name} name={name} value={option.value} defaultChecked={checked} />
       </Div>
     );
   }

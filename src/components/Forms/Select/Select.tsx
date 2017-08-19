@@ -7,7 +7,7 @@ import { SelectLabel } from './SelectLabel';
 import { Wrapper } from '../Wrapper';
 
 export interface ISelectOption {
-  key: number | string;
+  text: number | string;
   value: string;
 }
 export interface ISelectProps {

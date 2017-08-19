@@ -41,23 +41,44 @@ storiesOf('<Checkbox />', module)
   .add('Single', () => {
     const label = text('Label', 'Hello World');
     const name = text('Name', 'test');
-
-    return (
-      <Checkbox label={label} name={name} />
-    );
-  })
-  .add('Group', () => {
-    const options = [
-      { key: 1, value: 'A', checked: false },
-      { key: 2, value: 'B', checked: false },
-      { key: 3, value: 'C', checked: false },
-      { key: 4, value: 'D', checked: false },
-    ];
+    const option = {
+      text: 'Hello World',
+      value: 1,
+    };
     const onSelect = (option: any) => {
       console.log(option);
     };
 
     return (
-      <CheckboxGroup name='test' options={options} onSelect={onSelect}/>
+      <Checkbox
+        option={option}
+        name={name}
+        checked={true}
+        onSelect={onSelect}
+      />
+    );
+  })
+  .add('Group', () => {
+    const options = [
+      { value: 1, text: 'A' },
+      { value: 2, text: 'B' },
+      { value: 3, text: 'C' },
+      { value: 4, text: 'D' },
+    ];
+    const onSelect = (option: any) => {
+      console.log(option);
+    };
+    const onSelectAll = () => {
+      console.log('all');
+    };
+    const currentValue: string[] = [];
+    return (
+      <CheckboxGroup
+        name='test'
+        options={options}
+        currentValue={currentValue}
+        onSelect={onSelect}
+        onSelectAll={onSelectAll}
+      />
     );
   });
