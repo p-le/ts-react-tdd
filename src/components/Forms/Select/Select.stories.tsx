@@ -11,15 +11,15 @@ storiesOf('<Select />', module)
     const defaultValue = text('Default Value', 'キャンペーンを選択する');
     const options: ISelectOption[] = [
       {
-        key: 'A',
+        text: 'A',
         value: 'a',
       },
       {
-        key: 'B',
+        text: 'B',
         value: 'B',
       },
       {
-        key: 'C',
+        text: 'C',
         value: 'C',
       },
     ];

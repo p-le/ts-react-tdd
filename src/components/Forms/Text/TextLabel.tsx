@@ -8,7 +8,7 @@ interface ITextLabelProps {
 const renderFocus = (props: ITextLabelProps) => {
   if (props.isFocus || props.isValueExist) {
     return `
-      transform: translateY(-14px) scale(.8);
+      transform: translateY(-14px);
       transform-origin: 0 0;
     `;
   }
@@ -20,8 +20,7 @@ export const TextLabel = mergeProps<ITextLabelProps, HTMLLabelElement>(styled.la
   left: 0;
   height: 100%;
   color: ${props => props.theme.mainColor};
-  font-size: 1rem;
-  padding: 0 .2rem;
+  font-size: .7rem;
   cursor: text;
   font-weight: bold;
   pointer-events: none;

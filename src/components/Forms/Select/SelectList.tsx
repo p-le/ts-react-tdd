@@ -27,6 +27,7 @@ export const SelectListItem = styled.li`
   height: 2.5rem;
   padding: 0 .6rem;
   font-size: .8rem;
+  transition: background-color .3s ease;
 
   &:hover {
     background-color: rgba(0, 0, 0, .06);

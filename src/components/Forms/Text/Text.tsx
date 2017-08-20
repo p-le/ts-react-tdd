@@ -5,7 +5,7 @@ import { TextInput } from './TextInput';
 import { Wrapper } from '../Wrapper';
 import styled from '../../../utils/styled-components';
 
-interface ITextProps {
+export interface ITextProps {
   type?: string;
   label: string;
   name: string;

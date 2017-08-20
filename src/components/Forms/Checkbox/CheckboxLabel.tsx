@@ -6,7 +6,7 @@ export const CheckboxLabel = styled.label`
   padding-left: 2rem;
   height: 1.5rem;
   line-height: 1.5rem;
-  font-size: 1rem;
+  font-size: .7rem;
   user-select: none;
   cursor: pointer;
   color: ${props => props.theme.mainColor};

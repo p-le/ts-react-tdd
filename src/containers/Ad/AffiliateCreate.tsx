@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { AxiosResponse, AxiosError, CancelTokenSource } from 'axios';
-import { camelCase } from 'lodash';
+import { camelCase, range } from 'lodash';
 import * as  update from 'immutability-helper';
 import { AxiosFactory } from '../../utils/axios';
 
 import { Form } from '../../components/Forms/Form';
-import { Text } from '../../components/Forms/Text';
+import { Text, Number } from '../../components/Forms/Text';
 import { Textarea } from '../../components/Forms/Textarea';
 import { Checkbox, CheckboxGroup, ICheckboxOption } from '../../components/Forms/Checkbox';
 import { Select, ISelectOption } from '../../components/Forms/Select';
 import { Spinner } from '../../components/Shared/Spinner';
 import { Datetime } from '../../components/Forms/Datetime';
 import { Radio, IRadioOption } from '../../components/Forms/Radio';
+import { Hr } from '../../components/Shared/Hr';
 
 import { getMediaCategoryList } from '../../services/media-category';
 import { getAdCategoryList } from '../../services/ad-category';
@@ -23,18 +24,19 @@ import * as Constants from '../../utils/constants';
 interface IAffiliateCreateFormState {
     [key: string]: any;
     data: {
+        isTesting: number;
         name: string;
         note: string;
         cvCondition: string;
-        creativeType: number;
         advertiserId: number;
         adCategoryId: number;
-        isTesting: number;
         optionApp: number;
         payper: number;
         hasIncentiveAllowance: number;
         priceFixed: number;
         adminNote: string;
+        creativeType: number;
+        maxCreativeNum: number;
         os: number[];
     };
     form: {
@@ -60,6 +62,7 @@ interface IAffiliateCreateFormState {
         hasIncentiveAllowance: IRadioOption[];
         priceFixed: IRadioOption[];
         creativeTypes: ISelectOption[];
+        maxCreativeNums: ISelectOption[];
     };
 }
 
@@ -70,18 +73,19 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
         super();
         this.state = {
             data: {
+                isTesting: Constants.Status.On,
                 name: '',
                 note: '',
                 cvCondition: '',
                 adminNote: '',
-                creativeType: Constants.CreativeType.Text,
                 advertiserId: Constants.UndefinedId,
                 adCategoryId: Constants.UndefinedId,
-                isTesting: Constants.Status.On,
                 optionApp: Constants.Status.Off,
                 payper: Constants.Payper.Conversion,
                 hasIncentiveAllowance: Constants.Status.On,
                 priceFixed: Constants.PriceFixed.Amount,
+                creativeType: Constants.CreativeType.Text,
+                maxCreativeNum: Constants.DefaultMaxCreativeNum,
                 os: [],
             },
             form: {
@@ -104,9 +108,9 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                     data: [],
                 },
                 paypers: [
-                    { key: 3, value: 'クリック報酬' },
-                    { key: 4, value: '成果報酬' },
-                    { key: 5, value: 'クリック＆成果報酬' },
+                    { text: 'クリック報酬', value: Constants.Payper.Click },
+                    { text: '成果報酬', value: Constants.Payper.Conversion },
+                    { text: 'クリック＆成果報酬', value: Constants.Payper.ClickConversion },
                 ],
                 hasIncentiveAllowance: [
                     { text: '有', value: Constants.Status.On },
@@ -117,8 +121,11 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                     { text: '定率', value: Constants.PriceFixed.Percentage },
                 ],
                 creativeTypes: [
-
+                    { text: 'テキスト', value: Constants.CreativeType.Text },
+                    { text: '画像', value: Constants.CreativeType.Picture },
+                    { text: 'Javascript', value: Constants.CreativeType.JS },
                 ],
+                maxCreativeNums: range(1, 21).map(num => ({ text: num, value: num})),
             },
         };
 
@@ -198,13 +205,13 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
 
     handleOnSelectAdvertiser(option: ISelectOption) {
         this.setData({
-            advertiserId: option.key as number,
+            advertiserId: option.value as number,
         });
     }
 
     handleOnSelectAdCategory(option: ISelectOption) {
         this.setData({
-            adCategoryId: option.key as number,
+            adCategoryId: option.value as number,
         });
     }
 
@@ -252,7 +259,7 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
 
     handleSelectPayper(option: ISelectOption) {
         this.setData({
-            payper: option.key as number,
+            payper: option.value as number,
         });
     }
 
@@ -275,8 +282,8 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
     transformResponse(data: any): ISelectOption[] {
         return data.map((datum: any) => {
             const option: ISelectOption = {
-                key: datum.id,
-                value: `[${datum.id}] ${datum.name}`,
+                text: `[${datum.id}] ${datum.name}`,
+                value: datum.id,
             };
             return option;
         });
@@ -360,7 +367,27 @@ export class AffiliateCreate extends React.Component<{}, IAffiliateCreateFormSta
                     vertical={false}
                 />
                 <Textarea name='note' value={data.note} label='備考' onChange={this.handleOnChange} />
-                <Textarea name='admin_note' value={data.adminNote} label='経営者参考' onChange={this.handleOnChange}/>
+                <Number
+                    label='上限数までの残り件数が次の値になったらメール通知'
+                    name='announce_count'
+                />
+                <Textarea
+                    name='admin_note'
+                    value={data.adminNote}
+                    label='運営者備考'
+                    onChange={this.handleOnChange}
+                />
+                <Select
+                    label='原稿タイプ'
+                    defaultValue={data.creativeType}
+                    options={form.creativeTypes}
+                />
+                <Select
+                    label='原稿数（上限）'
+                    defaultValue={Constants.DefaultMaxCreativeNum}
+                    options={form.maxCreativeNums}
+                    onSelectFn={this.handleOnSelectAdvertiser}
+                />
             </Form>
         );
     }

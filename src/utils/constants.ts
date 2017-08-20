@@ -21,3 +21,12 @@ export enum CreativeType {
     Picture = 3,
     JS = 5,
 }
+
+export enum NoticeType {
+    New = 1,
+    Restart = 2,
+    GrowingUpUnitPrice = 3,
+    ConditionsChange = 9,
+}
+
+export const DefaultMaxCreativeNum = 1;

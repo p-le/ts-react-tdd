@@ -7,9 +7,9 @@ export const TextInput = styled.input.attrs({
   border: none;
   border-radius: 0;
   border-bottom: 2px solid ${props => props.theme.mainColor};
-  padding: .6rem .2rem;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
+  padding-top: .6rem;
+  padding-bottom: .3rem;
+  font-size: .8rem;
   width: 100%;
   outline: none;
   transition: .2s;

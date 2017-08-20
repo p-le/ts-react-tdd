@@ -7,14 +7,14 @@ import { SelectLabel } from './SelectLabel';
 import { Wrapper } from '../Wrapper';
 
 export interface ISelectOption {
-  text: number | string;
-  value: string;
+  text: string | number;
+  value: string | number;
 }
 export interface ISelectProps {
   label: string;
+  options: Array<ISelectOption | number>;
+  defaultValue: string | number;
   showLabel?: boolean;
-  options: ISelectOption[];
-  defaultValue: string;
   onSelectFn?: (option?: ISelectOption) => void;
 }
 
@@ -68,7 +68,7 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
       onSelectFn(option);
     }
     this.setState({
-      selectedValue: option.value,
+      selectedValue: option.text,
     });
     this.toggleSelectList();
   }
@@ -76,13 +76,13 @@ export class Select extends React.Component<ISelectProps, ISelectState> {
   render() {
     const { label, showLabel, options, defaultValue } = this.props;
 
-    const selectItems: JSX.Element[] = options.map((option: any) => (
+    const selectItems: JSX.Element[] = options.map((option: ISelectOption) => (
       <SelectListItem
         innerRef={this.handleItemRef}
-        key={option.key}
+        key={option.value}
         onClick={this.handleSelect.bind(this, option)}
       >
-        {option.value}
+        {option.text}
       </SelectListItem>
     ));
 

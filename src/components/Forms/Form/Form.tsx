@@ -11,6 +11,12 @@ type HTMLFormProps = React.HTMLProps<HTMLFormElement>;
 
 export class Form extends React.Component<HTMLFormProps, {}> {
     render() {
+        React.Children.forEach(this.props.children, (child: React.ReactChild, index) => {
+            if (React.isValidElement<React.ReactChild>(child)) {
+                console.log(child.props);
+            }
+        });
+
         return (
             <StyledForm onSubmit={this.props.onSubmit}>
                 {this.props.children}
